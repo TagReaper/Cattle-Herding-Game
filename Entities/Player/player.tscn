@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://cabt07t1h3rf2"]
+
+[ext_resource type="Script" uid="uid://d4h1uh0c1c3yt" path="res://Entities/Player/player.gd" id="1_mv1ah"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1574"]
+size = Vector2(64, 64)
+
+[sub_resource type="Gradient" id="Gradient_3uyv8"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.19921005, 0.42818522, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ie5d1"]
+gradient = SubResource("Gradient_3uyv8")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ie5d1"]
+radius = 100.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1574"]
+radius = 100.0
+height = 600.0
+
+[node name="Player" type="CharacterBody2D" unique_id=1982670583]
+script = ExtResource("1_mv1ah")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1538562805]
+shape = SubResource("RectangleShape2D_f1574")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=867004153]
+texture = SubResource("GradientTexture2D_ie5d1")
+
+[node name="FearZone" type="Area2D" parent="." unique_id=627188891]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FearZone" unique_id=125964253]
+shape = SubResource("CircleShape2D_ie5d1")
+
+[node name="Growl" type="Area2D" parent="." unique_id=855009046]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Growl" unique_id=1285122923]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_f1574")
+
+[node name="GrowlTimer" type="Timer" parent="Growl" unique_id=175207131]
+
+[node name="LeftNode" type="Node2D" parent="Growl" unique_id=1034504943]
+position = Vector2(-300, 0)
+
+[node name="RightNode" type="Node2D" parent="Growl" unique_id=1973815746]
+position = Vector2(300, 0)
+
+[node name="Bark" type="Area2D" parent="." unique_id=1216438141]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bark" unique_id=821132106]
+polygon = PackedVector2Array(-100, -300, 100, -300, 0, 0)
+
+[node name="BarkTimer" type="Timer" parent="Bark" unique_id=1710166046]
