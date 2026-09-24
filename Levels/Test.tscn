@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://beax4gv0ptmfv"]
 
+[ext_resource type="PackedScene" uid="uid://cabt07t1h3rf2" path="res://Entities/Player/player.tscn" id="1_n7cfa"]
+
 [sub_resource type="Gradient" id="Gradient_2wqeq"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(0.7967259, 0.90525675, 0.7361673, 1)
@@ -13,28 +15,29 @@ size = Vector2(2500, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pbelu"]
 size = Vector2(1000, 20)
 
-[node name="World" type="Node2D" unique_id=1463261773]
+[node name="Test" type="Node2D" unique_id=1463261773]
 
-[node name="Walls" type="StaticBody2D" parent="." unique_id=169914496]
-
-[node name="Sprite2D" type="Sprite2D" parent="Walls" unique_id=932087984]
-scale = Vector2(39, 16)
+[node name="Grass" type="Sprite2D" parent="." unique_id=932087984]
+scale = Vector2(33.44368, 18.991852)
 texture = SubResource("GradientTexture2D_f1574")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls" unique_id=544152952]
+[node name="Fences" type="StaticBody2D" parent="." unique_id=169914496]
+scale = Vector2(0.83701736, 1.1669908)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fences" unique_id=544152952]
 position = Vector2(0, -500)
 shape = SubResource("RectangleShape2D_f1574")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls" unique_id=1992005397]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Fences" unique_id=1992005397]
 position = Vector2(0, 500)
 shape = SubResource("RectangleShape2D_f1574")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Walls" unique_id=1834931676]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Fences" unique_id=1834931676]
 position = Vector2(1240, 0)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_pbelu")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Walls" unique_id=1822415404]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Fences" unique_id=1822415404]
 position = Vector2(-1242, 0)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_pbelu")
@@ -42,3 +45,8 @@ shape = SubResource("RectangleShape2D_pbelu")
 [node name="Entities" type="Node2D" parent="." unique_id=671843666]
 y_sort_enabled = true
 texture_filter = 1
+
+[node name="Player" parent="Entities" unique_id=1982670583 instance=ExtResource("1_n7cfa")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1263045405]
+zoom = Vector2(0.3, 0.3)

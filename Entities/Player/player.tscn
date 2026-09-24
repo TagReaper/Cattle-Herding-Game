@@ -12,9 +12,6 @@ colors = PackedColorArray(0.19921005, 0.42818522, 1, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ie5d1"]
 gradient = SubResource("Gradient_3uyv8")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ie5d1"]
-radius = 100.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1574"]
 radius = 100.0
 height = 600.0
@@ -28,12 +25,8 @@ shape = SubResource("RectangleShape2D_f1574")
 [node name="Sprite" type="Sprite2D" parent="." unique_id=867004153]
 texture = SubResource("GradientTexture2D_ie5d1")
 
-[node name="FearZone" type="Area2D" parent="." unique_id=627188891]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FearZone" unique_id=125964253]
-shape = SubResource("CircleShape2D_ie5d1")
-
 [node name="Growl" type="Area2D" parent="." unique_id=855009046]
+scale = Vector2(1.5, 1.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Growl" unique_id=1285122923]
 rotation = 1.5707964
@@ -48,6 +41,7 @@ position = Vector2(-300, 0)
 position = Vector2(300, 0)
 
 [node name="Bark" type="Area2D" parent="." unique_id=1216438141]
+scale = Vector2(1.5, 2)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bark" unique_id=821132106]
 polygon = PackedVector2Array(-100, -300, 100, -300, 0, 0)
