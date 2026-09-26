@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bqnxrrdmom2y2"]
+
+[ext_resource type="Script" uid="uid://1gv5lyd3ixk4" path="res://Entities/Animals/sheep.gd" id="1_fxt1a"]
+[ext_resource type="Texture2D" uid="uid://ccb4qxat4tsub" path="res://Assets/UI/AlertIcon.png" id="1_tcruk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lr2qf"]
+size = Vector2(64, 64)
+
+[sub_resource type="Gradient" id="Gradient_3uyv8"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.7105023, 0.39499256, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tcruk"]
+gradient = SubResource("Gradient_3uyv8")
+
+[node name="Sheep" type="CharacterBody2D" unique_id=1649043050 node_paths=PackedStringArray("AlertTimer", "UpCast", "RightCast", "DownCast", "LeftCast", "AlertIcon", "MovementCooldown")]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_fxt1a")
+speed = 20.0
+alert_time = 1.0
+AlertTimer = NodePath("Alert")
+UpCast = NodePath("Up")
+RightCast = NodePath("Right")
+DownCast = NodePath("Down")
+LeftCast = NodePath("Left")
+AlertIcon = NodePath("AlertIcon")
+MovementCooldown = NodePath("MoveCheck")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1791032184]
+shape = SubResource("RectangleShape2D_lr2qf")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=357197671]
+texture = SubResource("GradientTexture2D_tcruk")
+
+[node name="AlertIcon" type="Sprite2D" parent="." unique_id=1145588136]
+position = Vector2(0, -64)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_tcruk")
+
+[node name="Alert" type="Timer" parent="." unique_id=2047826527]
+
+[node name="MoveCheck" type="Timer" parent="." unique_id=2111340104]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="Up" type="RayCast2D" parent="." unique_id=1208217000]
+target_position = Vector2(0, -128)
+
+[node name="Right" type="RayCast2D" parent="." unique_id=1220087998]
+target_position = Vector2(128, 0)
+
+[node name="Down" type="RayCast2D" parent="." unique_id=1136834642]
+target_position = Vector2(0, 128)
+
+[node name="Left" type="RayCast2D" parent="." unique_id=1669253379]
+target_position = Vector2(-128, 0)
+
+[connection signal="timeout" from="Alert" to="." method="_on_alert_timeout"]

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://beax4gv0ptmfv"]
 
 [ext_resource type="PackedScene" uid="uid://cabt07t1h3rf2" path="res://Entities/Player/player.tscn" id="1_n7cfa"]
+[ext_resource type="PackedScene" uid="uid://bqnxrrdmom2y2" path="res://Entities/Animals/sheep.tscn" id="2_41s21"]
 
 [sub_resource type="Gradient" id="Gradient_2wqeq"]
 offsets = PackedFloat32Array(1)
@@ -47,6 +48,24 @@ y_sort_enabled = true
 texture_filter = 1
 
 [node name="Player" parent="Entities" unique_id=1982670583 instance=ExtResource("1_n7cfa")]
+
+[node name="Sheep" parent="Entities" unique_id=1649043050 instance=ExtResource("2_41s21")]
+position = Vector2(539, -151)
+
+[node name="Sheep2" parent="Entities" unique_id=938340272 instance=ExtResource("2_41s21")]
+position = Vector2(553, -277)
+
+[node name="Sheep3" parent="Entities" unique_id=1599799844 instance=ExtResource("2_41s21")]
+position = Vector2(694, -183)
+
+[node name="Sheep4" parent="Entities" unique_id=1722233355 instance=ExtResource("2_41s21")]
+position = Vector2(455, -31)
+
+[node name="Sheep5" parent="Entities" unique_id=933432424 instance=ExtResource("2_41s21")]
+position = Vector2(577, -28)
+
+[node name="Sheep6" parent="Entities" unique_id=387261974 instance=ExtResource("2_41s21")]
+position = Vector2(388, -174)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1263045405]
 zoom = Vector2(0.3, 0.3)

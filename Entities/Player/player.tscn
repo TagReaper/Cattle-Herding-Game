@@ -5,19 +5,28 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f1574"]
 size = Vector2(64, 64)
 
-[sub_resource type="Gradient" id="Gradient_3uyv8"]
+[sub_resource type="Gradient" id="Gradient_mv1ah"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(0.19921005, 0.42818522, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ie5d1"]
-gradient = SubResource("Gradient_3uyv8")
+gradient = SubResource("Gradient_mv1ah")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1574"]
-radius = 100.0
+radius = 128.0
 height = 600.0
 
-[node name="Player" type="CharacterBody2D" unique_id=1982670583]
+[node name="Player" type="CharacterBody2D" unique_id=1982670583 node_paths=PackedStringArray("GrowlTimer", "GrowlLeftNode", "GrowlRightNode", "BarkTimer", "LevelTimer", "RotationPoint", "TimerDisplay")]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_mv1ah")
+GrowlTimer = NodePath("Rotation Point/Growl/GrowlTimer")
+GrowlLeftNode = NodePath("Rotation Point/Growl/LeftNode")
+GrowlRightNode = NodePath("Rotation Point/Growl/RightNode")
+BarkTimer = NodePath("Rotation Point/Bark/BarkTimer")
+LevelTimer = NodePath("LevelTimer")
+RotationPoint = NodePath("Rotation Point")
+TimerDisplay = NodePath("CanvasLayer/Timer Label")
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=1538562805]
 shape = SubResource("RectangleShape2D_f1574")
@@ -25,27 +34,56 @@ shape = SubResource("RectangleShape2D_f1574")
 [node name="Sprite" type="Sprite2D" parent="." unique_id=867004153]
 texture = SubResource("GradientTexture2D_ie5d1")
 
-[node name="Growl" type="Area2D" parent="." unique_id=855009046]
-scale = Vector2(1.5, 1.5)
+[node name="LevelTimer" type="Timer" parent="." unique_id=1838217934]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Growl" unique_id=1285122923]
+[node name="Rotation Point" type="Node2D" parent="." unique_id=104031115]
+
+[node name="Growl" type="Area2D" parent="Rotation Point" unique_id=855009046]
+scale = Vector2(1.2, 1)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rotation Point/Growl" unique_id=1285122923]
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_f1574")
 
-[node name="GrowlTimer" type="Timer" parent="Growl" unique_id=175207131]
+[node name="GrowlTimer" type="Timer" parent="Rotation Point/Growl" unique_id=175207131]
 
-[node name="LeftNode" type="Node2D" parent="Growl" unique_id=1034504943]
+[node name="LeftNode" type="Node2D" parent="Rotation Point/Growl" unique_id=1034504943]
 position = Vector2(-300, 0)
 
-[node name="RightNode" type="Node2D" parent="Growl" unique_id=1973815746]
+[node name="RightNode" type="Node2D" parent="Rotation Point/Growl" unique_id=1973815746]
 position = Vector2(300, 0)
 
-[node name="Bark" type="Area2D" parent="." unique_id=1216438141]
+[node name="Bark" type="Area2D" parent="Rotation Point" unique_id=1216438141]
 scale = Vector2(1.5, 2)
+collision_layer = 0
+collision_mask = 4
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bark" unique_id=821132106]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rotation Point/Bark" unique_id=821132106]
 polygon = PackedVector2Array(-100, -300, 100, -300, 0, 0)
 
-[node name="BarkTimer" type="Timer" parent="Bark" unique_id=1710166046]
+[node name="BarkTimer" type="Timer" parent="Rotation Point/Bark" unique_id=1710166046]
 
-[node name="LevelTimer" type="Timer" parent="." unique_id=1838217934]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1136237499]
+
+[node name="Timer Label" type="RichTextLabel" parent="CanvasLayer" unique_id=664630488]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -71.75
+offset_top = 8.0
+offset_right = 71.75
+offset_bottom = 38.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+text = "TimeLeft"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="timeout" from="LevelTimer" to="." method="_on_level_timer_timeout"]
