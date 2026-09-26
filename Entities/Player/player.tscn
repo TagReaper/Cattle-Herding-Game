@@ -47,3 +47,5 @@ scale = Vector2(1.5, 2)
 polygon = PackedVector2Array(-100, -300, 100, -300, 0, 0)
 
 [node name="BarkTimer" type="Timer" parent="Bark" unique_id=1710166046]
+
+[node name="LevelTimer" type="Timer" parent="." unique_id=1838217934]
