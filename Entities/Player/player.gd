@@ -49,6 +49,10 @@ func _physics_process(delta: float) -> void:
 		
 		if current_state == State.GROWL:
 			# Apply growl direction and alert for all sheep in the growl zone here
+			for sheep in GrowlSheepArray:
+				sheep.current_state = sheep.State.ALERT
+				sheep._alert()
+				sheep.direction = _get_flee_direction(sheep.global_position)
 			direction /= 2
 		
 		if direction != Vector2.ZERO:
@@ -90,6 +94,8 @@ func _physics_process(delta: float) -> void:
 func _animation_check() -> void:
 	#**************#
 	# MAKE DOG LOOK WHERE BARK IS!
+	if current_state == State.GROWL:
+		direction *= 2
 	match direction:
 		Vector2(1,0):              # R-Facing
 			RotationPoint.rotation_degrees = 90
@@ -113,7 +119,9 @@ func _get_flee_direction(_location: Vector2) -> Vector2:
 	var returnVector = Vector2.ZERO
 	match current_state:
 		State.GROWL: # Run Perpendicular to the Growl Line
-			
+			var V: Vector2 = GrowlRightNode.global_position - GrowlLeftNode.global_position
+			var t: float = ((_location - GrowlLeftNode.global_position).dot(V))/(V.dot(V))
+			returnVector = (_location - (GrowlLeftNode.global_position + t*V))
 			return returnVector.normalized()
 		State.BARK: # Run to the pen
 			
@@ -137,10 +145,10 @@ func _bark() -> void:
 
 # Reset the level on timeout
 func _on_level_timer_timeout() -> void:
-	get_tree().reload_current_scene()
+	pass
 
 func _on_growl_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
+	GrowlSheepArray.append(body)
 
 func _on_bark_body_entered(body: Node2D) -> void:
 	BarkSheepArray.append(body)

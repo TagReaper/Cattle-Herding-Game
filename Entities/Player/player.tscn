@@ -18,7 +18,7 @@ height = 600.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1982670583 node_paths=PackedStringArray("GrowlTimer", "GrowlLeftNode", "GrowlRightNode", "BarkTimer", "LevelTimer", "RotationPoint", "TimerDisplay", "BarkZone")]
 collision_layer = 2
-collision_mask = 5
+collision_mask = 13
 script = ExtResource("1_mv1ah")
 GrowlTimer = NodePath("Rotation Point/Growl/GrowlTimer")
 GrowlLeftNode = NodePath("Rotation Point/Growl/LeftNode")

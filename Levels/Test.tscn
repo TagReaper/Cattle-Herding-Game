@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cabt07t1h3rf2" path="res://Entities/Player/player.tscn" id="1_n7cfa"]
 [ext_resource type="PackedScene" uid="uid://bqnxrrdmom2y2" path="res://Entities/Animals/sheep.tscn" id="2_41s21"]
+[ext_resource type="PackedScene" uid="uid://cqwip4esdy1lk" path="res://Pieces/goal.tscn" id="3_f8gr7"]
 
 [sub_resource type="Gradient" id="Gradient_2wqeq"]
 offsets = PackedFloat32Array(1)
@@ -10,62 +11,97 @@ colors = PackedColorArray(0.7967259, 0.90525675, 0.7361673, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_f1574"]
 gradient = SubResource("Gradient_2wqeq")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ie5d1"]
+size = Vector2(19.115477, 486.722)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f1574"]
 size = Vector2(2500, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pbelu"]
 size = Vector2(1000, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_41s21"]
+size = Vector2(251.66083, 19.115417)
+
 [node name="Test" type="Node2D" unique_id=1463261773]
+scale = Vector2(1, 0.9609892)
 
 [node name="Grass" type="Sprite2D" parent="." unique_id=932087984]
 scale = Vector2(33.44368, 18.991852)
 texture = SubResource("GradientTexture2D_f1574")
 
-[node name="Fences" type="StaticBody2D" parent="." unique_id=169914496]
-scale = Vector2(0.83701736, 1.1669908)
+[node name="Fences-Boarder" type="Node2D" parent="." unique_id=786544102]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Fences" unique_id=544152952]
+[node name="PlayerGate" type="StaticBody2D" parent="Fences-Boarder" unique_id=472785448]
+scale = Vector2(0.83701736, 1.1669908)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fences-Boarder/PlayerGate" unique_id=154711557]
+position = Vector2(449.2141, -4.1878886)
+shape = SubResource("RectangleShape2D_ie5d1")
+debug_color = Color(0.9982843, 0, 0.15714613, 0.41960785)
+
+[node name="Fences" type="StaticBody2D" parent="Fences-Boarder" unique_id=169914496]
+scale = Vector2(0.83701736, 1.1669908)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fences-Boarder/Fences" unique_id=544152952]
 position = Vector2(0, -500)
 shape = SubResource("RectangleShape2D_f1574")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Fences" unique_id=1992005397]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Fences-Boarder/Fences" unique_id=1992005397]
 position = Vector2(0, 500)
 shape = SubResource("RectangleShape2D_f1574")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Fences" unique_id=1834931676]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Fences-Boarder/Fences" unique_id=1834931676]
 position = Vector2(1240, 0)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_pbelu")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Fences" unique_id=1822415404]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Fences-Boarder/Fences" unique_id=1822415404]
 position = Vector2(-1242, 0)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_pbelu")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Fences-Boarder/Fences" unique_id=84003298]
+position = Vector2(449.2141, -370.9432)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_41s21")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Fences-Boarder/Fences" unique_id=487575228]
+position = Vector2(449.2141, 365.0035)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_41s21")
 
 [node name="Entities" type="Node2D" parent="." unique_id=671843666]
 y_sort_enabled = true
 texture_filter = 1
 
 [node name="Player" parent="Entities" unique_id=1982670583 instance=ExtResource("1_n7cfa")]
+position = Vector2(-787, -12)
 
 [node name="Sheep" parent="Entities" unique_id=1649043050 instance=ExtResource("2_41s21")]
-position = Vector2(539, -151)
+position = Vector2(56, -33.299026)
 
 [node name="Sheep2" parent="Entities" unique_id=938340272 instance=ExtResource("2_41s21")]
-position = Vector2(553, -277)
+position = Vector2(112, 99.897064)
 
 [node name="Sheep3" parent="Entities" unique_id=1599799844 instance=ExtResource("2_41s21")]
-position = Vector2(694, -183)
+position = Vector2(16, -216.44366)
 
 [node name="Sheep4" parent="Entities" unique_id=1722233355 instance=ExtResource("2_41s21")]
-position = Vector2(455, -31)
+position = Vector2(-40, 208.1189)
 
 [node name="Sheep5" parent="Entities" unique_id=933432424 instance=ExtResource("2_41s21")]
-position = Vector2(577, -28)
+position = Vector2(-224, -116.54658)
 
-[node name="Sheep6" parent="Entities" unique_id=387261974 instance=ExtResource("2_41s21")]
-position = Vector2(388, -174)
+[node name="Goal" parent="." unique_id=427021190 node_paths=PackedStringArray("player") instance=ExtResource("3_f8gr7")]
+process_mode = 3
+position = Vector2(744, 16.649511)
+scale = Vector2(6.034162, 9.639957)
+player = NodePath("../Entities/Player")
+sheep_total = 5
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1263045405]
 zoom = Vector2(0.3, 0.3)

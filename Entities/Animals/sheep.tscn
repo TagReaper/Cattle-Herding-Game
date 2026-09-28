@@ -15,10 +15,10 @@ gradient = SubResource("Gradient_3uyv8")
 
 [node name="Sheep" type="CharacterBody2D" unique_id=1649043050 node_paths=PackedStringArray("AlertTimer", "UpCast", "RightCast", "DownCast", "LeftCast", "AlertIcon", "MovementCooldown")]
 collision_layer = 4
-collision_mask = 7
+collision_mask = 3
 script = ExtResource("1_fxt1a")
-speed = 20.0
-alert_time = 1.0
+speed = 18.0
+alert_time = 0.7
 AlertTimer = NodePath("Alert")
 UpCast = NodePath("Up")
 RightCast = NodePath("Right")
@@ -39,6 +39,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_tcruk")
 
 [node name="Alert" type="Timer" parent="." unique_id=2047826527]
+one_shot = true
 
 [node name="MoveCheck" type="Timer" parent="." unique_id=2111340104]
 wait_time = 0.5

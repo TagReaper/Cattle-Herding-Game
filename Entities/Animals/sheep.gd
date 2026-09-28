@@ -22,6 +22,7 @@ var current_state: int
 var direction: Vector2 = Vector2.ZERO
 var friction: float = 1
 var player: CharacterBody2D
+var calmed: bool = false
 
 enum State {
 	IDLE,
@@ -38,7 +39,12 @@ func _physics_process(delta: float) -> void:
 	if player == null:
 		player = get_parent().get_child(0)
 	
-	if global_position.distance_to(player.global_position) < fear_distance:
+	if current_state == State.ALERT && calmed:
+		AlertTimer.stop()
+		AlertTimer.timeout.emit()
+		direction = Vector2(1,0)
+	
+	if global_position.distance_to(player.global_position) < fear_distance and player.current_state != player.State.GROWL:
 		if current_state == State.IDLE:
 			current_state = State.ALERT
 			_alert()
@@ -97,6 +103,9 @@ func _animation_check() -> void:
 			pass
 		else: # L
 			pass
+
+func _death() -> void:
+	get_parent().get_parent().get_child(3).sheep_lost += 1
 
 func _on_alert_timeout() -> void:
 	var tween = create_tween().set_parallel(true)
